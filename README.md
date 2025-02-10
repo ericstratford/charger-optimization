@@ -14,14 +14,14 @@ To re-run the code provided in CS_Lots, one needs to download the data, shapefil
 We use an API to query data on public electric vehicle charging station locations from the Alternative Fuels Data Center via this [API setup](https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/). To query from the Python file, an API key is needed, which can be obtained by signing up through the aforementioned link. Simply replace the "***" in the data query cell with the newly obtained API key in order to properly query the charging station data later used.
 
 ** Libraries/Requirements **
-pandas
-numpy
-requests
-geopandas
-matplotlib
-folium
-osmnx
-geopy
-shapely
-scikit-learn
-branca
+- pandas
+- numpy
+- requests
+- geopandas
+- matplotlib
+- folium
+- osmnx
+- geopy
+- shapely
+- scikit-learn
+- branca
