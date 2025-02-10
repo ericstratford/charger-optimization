@@ -8,7 +8,7 @@ This project aims to provide an interactive tool which recommends the best locat
 #### CS_Lots
 
 ** Downloads **
-To re-run the code provided in CS_Lots, one needs to download the data, shapefiles, and python notebook provided in the main repository. The income.geojson and population.geojson files provided in the income and population branches are also imported in the notebook as pre-ran datafiles.
+To re-run the code provided in CS_Lots, one needs to download the data, shapefiles, and python notebook provided in the main repository.
 
 ** APIs **
 We use an API to query data on public electric vehicle charging station locations from the Alternative Fuels Data Center via this [API setup](https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/). To query from the Python file, an API key is needed, which can be obtained by signing up through the aforementioned link. Simply replace the "***" in the data query cell with the newly obtained API key in order to properly query the charging station data later used.
