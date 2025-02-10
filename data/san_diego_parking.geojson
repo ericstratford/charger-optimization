@@ -1,0 +1,1178 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.197307,
+                    32.832734
+                ]
+            },
+            "properties": {
+                "id": 290588762,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "no",
+                "access": "yes"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.159807,
+                    32.747164
+                ]
+            },
+            "properties": {
+                "id": 316725319,
+                "name": "No Name",
+                "parking_type": "multi-storey",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.16121,
+                    32.747656
+                ]
+            },
+            "properties": {
+                "id": 349207606,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.16163,
+                    32.747521
+                ]
+            },
+            "properties": {
+                "id": 351102573,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.102349,
+                    32.750016
+                ]
+            },
+            "properties": {
+                "id": 356499811,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "private"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.161936,
+                    32.748709
+                ]
+            },
+            "properties": {
+                "id": 561103961,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.272337,
+                    32.8469
+                ]
+            },
+            "properties": {
+                "id": 596232440,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.126851,
+                    32.747786
+                ]
+            },
+            "properties": {
+                "id": 596252572,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "no",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.155018,
+                    32.709912
+                ]
+            },
+            "properties": {
+                "id": 596737572,
+                "name": "Padres Parcade",
+                "parking_type": "multi-storey",
+                "fee": "yes",
+                "access": "yes"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.255383,
+                    32.962914
+                ]
+            },
+            "properties": {
+                "id": 675129149,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.521105,
+                    -0.222357
+                ]
+            },
+            "properties": {
+                "id": 1005854190,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.520902,
+                    -0.222385
+                ]
+            },
+            "properties": {
+                "id": 1005854262,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.520371,
+                    -0.222514
+                ]
+            },
+            "properties": {
+                "id": 1005854629,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.105112,
+                    32.909262
+                ]
+            },
+            "properties": {
+                "id": 1358015210,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.161334,
+                    32.704887
+                ]
+            },
+            "properties": {
+                "id": 1462817888,
+                "name": "No Name",
+                "parking_type": "street_side",
+                "fee": "unknown",
+                "access": "private"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.080106,
+                    32.774634
+                ]
+            },
+            "properties": {
+                "id": 1607115537,
+                "name": "Plaza Deportes Lot",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.246651,
+                    32.949421
+                ]
+            },
+            "properties": {
+                "id": 2158326602,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.245837,
+                    32.949732
+                ]
+            },
+            "properties": {
+                "id": 2158326603,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.138293,
+                    32.891235
+                ]
+            },
+            "properties": {
+                "id": 2532842014,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.154443,
+                    32.708769
+                ]
+            },
+            "properties": {
+                "id": 3067376528,
+                "name": "San Diego Central Library Parking",
+                "parking_type": "underground",
+                "fee": "unknown",
+                "access": "customers"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.250798,
+                    32.877331
+                ]
+            },
+            "properties": {
+                "id": 3229069452,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "private"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.206643,
+                    32.73139
+                ]
+            },
+            "properties": {
+                "id": 4349683484,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.001083,
+                    32.929927
+                ]
+            },
+            "properties": {
+                "id": 4495715774,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.059769,
+                    32.817636
+                ]
+            },
+            "properties": {
+                "id": 4531036690,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.024299,
+                    32.846229
+                ]
+            },
+            "properties": {
+                "id": 4839273182,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "no",
+                "access": "customers"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.036006,
+                    32.79907
+                ]
+            },
+            "properties": {
+                "id": 5093466278,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.035903,
+                    32.803548
+                ]
+            },
+            "properties": {
+                "id": 5093475210,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.044695,
+                    32.79105
+                ]
+            },
+            "properties": {
+                "id": 5093482952,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.04705,
+                    32.790691
+                ]
+            },
+            "properties": {
+                "id": 5093520376,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.049874,
+                    32.790849
+                ]
+            },
+            "properties": {
+                "id": 5093525028,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.06674,
+                    32.793563
+                ]
+            },
+            "properties": {
+                "id": 5108581278,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.065798,
+                    32.794334
+                ]
+            },
+            "properties": {
+                "id": 5108581279,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.078319,
+                    32.82969
+                ]
+            },
+            "properties": {
+                "id": 5194956384,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.077089,
+                    32.829093
+                ]
+            },
+            "properties": {
+                "id": 5194956528,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.076773,
+                    32.828986
+                ]
+            },
+            "properties": {
+                "id": 5194956574,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.026028,
+                    32.802777
+                ]
+            },
+            "properties": {
+                "id": 5278645003,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.130098,
+                    32.951929
+                ]
+            },
+            "properties": {
+                "id": 5434550736,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.085544,
+                    33.014264
+                ]
+            },
+            "properties": {
+                "id": 5578705870,
+                "name": "pear parking",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.167668,
+                    32.710201
+                ]
+            },
+            "properties": {
+                "id": 5799218428,
+                "name": "Manchester Grand Hyatt San Diego Parking Garage",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.163139,
+                    32.715385
+                ]
+            },
+            "properties": {
+                "id": 5836926619,
+                "name": "No Name",
+                "parking_type": "underground",
+                "fee": "yes",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.185201,
+                    32.857538
+                ]
+            },
+            "properties": {
+                "id": 5839576935,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.001387,
+                    32.929561
+                ]
+            },
+            "properties": {
+                "id": 5859858301,
+                "name": "Mission Trails Regional Park - West Sycamore Parking Lot",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.115082,
+                    32.798956
+                ]
+            },
+            "properties": {
+                "id": 6061756518,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.115034,
+                    32.79976
+                ]
+            },
+            "properties": {
+                "id": 6061756542,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.076591,
+                    32.772428
+                ]
+            },
+            "properties": {
+                "id": 6340581771,
+                "name": "No Name",
+                "parking_type": "multi-storey",
+                "fee": "yes",
+                "access": "permit"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.091875,
+                    32.800026
+                ]
+            },
+            "properties": {
+                "id": 6580618949,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "private"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.091781,
+                    32.800363
+                ]
+            },
+            "properties": {
+                "id": 6580618953,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.237112,
+                    32.869383
+                ]
+            },
+            "properties": {
+                "id": 6669259301,
+                "name": "No Name",
+                "parking_type": "lane",
+                "fee": "unknown",
+                "access": "permit"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.105076,
+                    32.889141
+                ]
+            },
+            "properties": {
+                "id": 7607212231,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.239786,
+                    32.969969
+                ]
+            },
+            "properties": {
+                "id": 8026651705,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.234905,
+                    32.951828
+                ]
+            },
+            "properties": {
+                "id": 8091645577,
+                "name": "No Name",
+                "parking_type": "lane",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.172001,
+                    32.716854
+                ]
+            },
+            "properties": {
+                "id": 9085794754,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.164312,
+                    32.713623
+                ]
+            },
+            "properties": {
+                "id": 9559505830,
+                "name": "No Name",
+                "parking_type": "street_side",
+                "fee": "yes",
+                "access": "yes"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.160518,
+                    32.722103
+                ]
+            },
+            "properties": {
+                "id": 9716294403,
+                "name": "Laz Parking Garage",
+                "parking_type": "multi-storey",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.147428,
+                    32.736908
+                ]
+            },
+            "properties": {
+                "id": 10016876666,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "no",
+                "access": "yes"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.124616,
+                    32.748127
+                ]
+            },
+            "properties": {
+                "id": 10016882273,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "yes"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.030056,
+                    32.847076
+                ]
+            },
+            "properties": {
+                "id": 10016894841,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "no",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.247783,
+                    32.889161
+                ]
+            },
+            "properties": {
+                "id": 10153735400,
+                "name": "\"UCSD Theatre District Living and Learning Neighborhood\" Construction Parking",
+                "parking_type": "surface",
+                "fee": "yes",
+                "access": "customers"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.148106,
+                    32.769495
+                ]
+            },
+            "properties": {
+                "id": 10848062541,
+                "name": "No Name",
+                "parking_type": "underground",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.171748,
+                    32.767814
+                ]
+            },
+            "properties": {
+                "id": 11146972120,
+                "name": "No Name",
+                "parking_type": "multi-storey",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.072618,
+                    32.738006
+                ]
+            },
+            "properties": {
+                "id": 11170874538,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.246188,
+                    32.75466
+                ]
+            },
+            "properties": {
+                "id": 11182287437,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.141705,
+                    32.701625
+                ]
+            },
+            "properties": {
+                "id": 11192149837,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.155062,
+                    32.749383
+                ]
+            },
+            "properties": {
+                "id": 11195030737,
+                "name": "No Name",
+                "parking_type": "underground",
+                "fee": "no",
+                "access": "customers"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.072666,
+                    32.708278
+                ]
+            },
+            "properties": {
+                "id": 11548914908,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "customers"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.113836,
+                    32.924582
+                ]
+            },
+            "properties": {
+                "id": 11756586919,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.253242,
+                    32.800889
+                ]
+            },
+            "properties": {
+                "id": 12073717088,
+                "name": "Saint Brigid Parish Parking",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.251831,
+                    32.798628
+                ]
+            },
+            "properties": {
+                "id": 12076187595,
+                "name": "No Name",
+                "parking_type": "unknown",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -117.154234,
+                    32.797885
+                ]
+            },
+            "properties": {
+                "id": 12292981338,
+                "name": "No Name",
+                "parking_type": "surface",
+                "fee": "unknown",
+                "access": "unknown"
+            }
+        }
+    ]
+}
