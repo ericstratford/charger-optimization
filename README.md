@@ -4,10 +4,6 @@ Electric Vehicle Charging Stations - Optimizing Placement Tool via Infrastructur
 ## Overview
 The EVCS-OPTIM project provides an interactive tool designed to recommend optimal locations for new electric vehicle (EV) charging stations. By integrating multiple datasets and employing geospatial, temporal, and optimization analyses, our tool assists urban planners, utility companies, and community advocates in making data-driven decisions for infrastructure deployment. The current model evaluates public parking lots, scoring each based on factors such as proximity to key infrastructures, traffic density, population demographics, and grid constraints before ranking them according to user-defined criteria.
 
-## Project Motivation and Background
-As EV adoption accelerates, especially in regions like San Diego, the strategic placement of charging stations becomes crucial to avoid "charging deserts" and alleviate range anxiety. This project leverages historical EV adoption data, transit patterns, and power grid information to address these challenges. Our approach draws inspiration from existing research and tools (e.g., NREL, EVI-EnSite) while incorporating advanced optimization techniques to recommend locations that maximize both demand coverage and infrastructural feasibility.
-
-<img src="https://raw.githubusercontent.com/ericstratford/charger-optimization/main/picture/us-public-and-private-el.svg" width="500">
 
 ### Reproducing
 #### CS_Lots
