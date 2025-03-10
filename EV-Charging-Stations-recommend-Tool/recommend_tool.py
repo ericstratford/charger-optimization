@@ -11,33 +11,33 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit.components.v1 as components
 
-# 设置页面标题和布局
+# Set page title and layout
 st.set_page_config(
     page_title="EV Charging Station Demand Map",
     layout="wide"
 )
 
-# 页面标题和描述
+# Page title and description
 st.title("EV Charging Station Demand Score Map with ML Analysis")
 st.markdown("This map uses machine learning to analyze and recommend optimal EV charging station locations.")
 
-# 加载数据函数
+# Function to load data
 @st.cache_data
 def load_data():
     """Load and prepare the geodataframe with merged features"""
-    # 替换为您的实际数据加载代码
-    # 例如:
+    # Replace with your actual data loading code
+    # For example:
     # merged_features = gpd.read_file("your_data.geojson")
     
-    # 如果您有CSV文件:
+    # If you have a CSV file:
     merged_features = pd.read_csv("features.csv")
     merged_features['geometry'] = gpd.GeoSeries.from_wkt(merged_features['geometry'])
     merged_features = gpd.GeoDataFrame(merged_features, geometry='geometry')
     
-    # 确保坐标参考系统正确设置
+    # Ensure the correct coordinate reference system is set
     merged_features.set_crs(epsg=4326, inplace=True)
     
-    # 计算区域适宜性分数
+    # Calculate zoning suitability score
     zoning_suitability = {
         'Commercial': 1.0, 
         'Office': 0.8, 
@@ -56,7 +56,7 @@ def load_data():
     
     merged_features['zoning_score'] = merged_features['zone_type'].map(zoning_suitability) * 0.1
     
-    # 手动根据专家知识分配权重
+    # Manually assign weights based on expert knowledge
     merged_features['distance_score'] = merged_features['percentile_distance_to_nearest_charger'] * 0.5
     merged_features['radius_score'] = merged_features['percentile_chargers_in_radius'] * -0.3
     merged_features['cs_total_score'] = merged_features['percentile_cs_total'] * -0.2
@@ -64,7 +64,7 @@ def load_data():
     merged_features['population_score'] = merged_features['percentile_Population'] * 0.2
     merged_features['income_score'] = merged_features['percentile_Median Income'] * 0.1
     
-    # 计算包含交通分数的组合需求分数
+    # Calculate combined demand score including traffic score
     merged_features['demand_score'] = (
         merged_features['distance_score'] +
         merged_features['radius_score'] +
@@ -77,61 +77,59 @@ def load_data():
     
     return merged_features
 
-# 使用ML分析分数和定义阈值的函数
+# Function to analyze scores with ML and define thresholds
 @st.cache_data
 def analyze_scores_with_ml(_data):
     """
-    使用机器学习技术分析分数，确定阈值并对位置进行分类
+    Use machine learning techniques to analyze scores, determine thresholds, and classify locations.
     
-    参数:
-    _data (DataFrame): 包含所有位置及其分数的数据框
+    Parameters:
+    _data (DataFrame): DataFrame containing all locations and their scores.
     
-    返回:
-    dict: 包含阈值和聚类信息的字典
+    Returns:
+    dict: Dictionary containing thresholds and clustering information.
     """
-    # 使用数据的副本进行操作
+    # Work with a copy of the data
     data = _data.copy()
     
-    # 选择相关特征进行聚类
+    # Select relevant features for clustering
     score_columns = [col for col in data.columns if col.endswith('_score') and col != 'demand_score']
 
-
-    
     if not score_columns:
-        # 如果找不到分数列则使用默认值
+        # If no score columns are found, use default values
         return {
-            'demand_thresholds': [0.33, 0.66],  # 默认阈值
+            'demand_thresholds': [0.33, 0.66],  # Default thresholds
             'factor_thresholds': {},
             'clusters': None,
             'cluster_descriptions': {}
         }
     
-    # 提取用于聚类的特征
+    # Extract features for clustering
     features = data[score_columns].copy()
-    features = features.fillna(0)  # 填充NaN值
+    features = features.fillna(0)  # Fill NaN values
     
-    # 标准化特征
+    # Standardize features
     scaler = StandardScaler()
     scaled_features = scaler.fit_transform(features)
     
-    # 确定最佳聚类数量（简化版本）
+    # Determine the optimal number of clusters (simplified version)
     n_clusters = min(5, len(data) // 10) if len(data) > 10 else 3
     
-    # 应用K-means聚类
+    # Apply K-means clustering
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
     clusters = kmeans.fit_predict(scaled_features)
     
-    # 将聚类分配添加到数据中
+    # Add clustering assignment to the data
     data_with_clusters = data.copy()
     data_with_clusters['cluster'] = clusters
     
-    # 计算每个聚类的平均分数
+    # Compute average scores for each cluster
     cluster_profiles = data_with_clusters.groupby('cluster')[score_columns + ['demand_score']].mean()
     
-    # 按需求分数排序聚类（从高到低）
+    # Sort clusters by demand score (from high to low)
     cluster_profiles = cluster_profiles.sort_values('demand_score', ascending=False)
     
-    # 为聚类分配描述性标签
+    # Assign descriptive labels to clusters
     cluster_descriptions = {}
     for i, (cluster_idx, profile) in enumerate(cluster_profiles.iterrows()):
         if i == 0:
@@ -141,7 +139,7 @@ def analyze_scores_with_ml(_data):
         else:
             desc = "Low Priority"
         
-        # 找出前3个贡献因素
+        # Find the top 3 contributing factors
         factor_scores = profile[score_columns].sort_values(ascending=False)
         top_factors = factor_scores.index[:3].tolist()
         factor_desc = [f.replace('_score', '').replace('_', ' ').title() for f in top_factors]
@@ -152,7 +150,7 @@ def analyze_scores_with_ml(_data):
             'avg_demand_score': profile['demand_score']
         }
     
-    # 确定需求分数的阈值
+    # Determine thresholds for demand score
     demand_scores = data['demand_score'].dropna()
     if len(demand_scores) > 0:
         demand_thresholds = [
@@ -160,9 +158,9 @@ def analyze_scores_with_ml(_data):
             demand_scores.quantile(0.66)
         ]
     else:
-        demand_thresholds = [0.33, 0.66]  # 默认回退值
+        demand_thresholds = [0.33, 0.66]  # Default fallback values
     
-    # 确定每个因素的阈值
+    # Determine threshold values for each factor
     factor_thresholds = {}
     for factor in score_columns:
         values = data[factor].dropna()
@@ -175,24 +173,24 @@ def analyze_scores_with_ml(_data):
     return {
         'demand_thresholds': demand_thresholds,
         'factor_thresholds': factor_thresholds,
-        'clusters': clusters.tolist(),  # 将numpy数组转换为列表以支持哈希
+        'clusters': clusters.tolist(),  # Convert numpy array to list for serialization
         'cluster_descriptions': cluster_descriptions
     }
 
-# 基于分数阈值生成语言的函数
+# Function to generate descriptive language for scores based on thresholds
 def get_score_description(score, thresholds, factor_name=None):
     """
-    基于阈值为分数生成描述性语言
+    Generate descriptive language for a score based on thresholds.
     
-    参数:
-    score (float): 分数值
-    thresholds (list): 阈值列表 [low_threshold, high_threshold]
-    factor_name (str, optional): 被描述的因素名称
+    Parameters:
+    score (float): The score value.
+    thresholds (list): List of thresholds [low_threshold, high_threshold].
+    factor_name (str, optional): The name of the factor being described.
     
-    返回:
+    Returns:
     tuple: (description, intensity)
     """
-    # 为不同因素定义语言模板
+    # Define language templates for different factors
     language_templates = {
         'distance': {
             'low': "very close to existing chargers",
@@ -236,7 +234,7 @@ def get_score_description(score, thresholds, factor_name=None):
         }
     }
     
-    # 确定强度类别
+    # Determine intensity category
     if score < thresholds[0]:
         intensity = 'low'
     elif score > thresholds[1]:
@@ -244,9 +242,9 @@ def get_score_description(score, thresholds, factor_name=None):
     else:
         intensity = 'medium'
     
-    # 根据因素名称获取适当的语言
+    # Get appropriate language based on factor name
     if factor_name:
-        # 提取基本因素名称（删除_score后缀）
+        # Remove the _score suffix to get the base factor name
         base_factor = factor_name.replace('_score', '')
         templates = language_templates.get(base_factor, language_templates['default'])
     else:
@@ -256,20 +254,20 @@ def get_score_description(score, thresholds, factor_name=None):
     
     return description, intensity
 
-# 根据需求分数和聚类获取推荐状态的函数
+# Function to determine recommendation status based on demand score and clustering information
 def get_recommendation_status(demand_score, thresholds, cluster_desc=None):
     """
-    根据需求分数和聚类信息确定推荐状态
+    Determine recommendation status based on demand score and clustering information.
     
-    参数:
-    demand_score (float): 需求分数
-    thresholds (list): 阈值列表 [low_threshold, high_threshold]
-    cluster_desc (dict, optional): 聚类描述信息
+    Parameters:
+    demand_score (float): The demand score.
+    thresholds (list): List of thresholds [low_threshold, high_threshold].
+    cluster_desc (dict, optional): Clustering description information.
     
-    返回:
-    str: 推荐状态
+    Returns:
+    str: Recommendation status.
     """
-    # 基本基于阈值的确定
+    # Basic threshold-based determination
     if demand_score < thresholds[0]:
         status = "Not Recommended"
     elif demand_score > thresholds[1]:
@@ -277,40 +275,41 @@ def get_recommendation_status(demand_score, thresholds, cluster_desc=None):
     else:
         status = "Recommended"
     
-    # 如果有聚类信息则覆盖
+    # Override if clustering information is available
     if cluster_desc:
         if cluster_desc['description'] == "High Priority":
             status = "Highly Recommended"
         elif cluster_desc['description'] == "Low Priority":
             if status == "Highly Recommended":
-                status = "Recommended"  # 基于聚类降级
+                status = "Recommended"  # Downgrade based on clustering
     
     return status
-# 基于ML分析为推荐生成解释文本的函数
+
+# Function to generate HTML explanation text for recommendations based on ML analysis
 def generate_ml_explanations(recommendations_df, ml_analysis):
     """
-    生成基于机器学习分析的推荐位置的可读性解释
+    Generate a human-readable explanation of the recommended locations based on machine learning analysis.
     
-    参数:
-    recommendations_df (DataFrame): 包含推荐位置及其分数的数据框
-    ml_analysis (dict): ML分析结果，包括阈值和聚类
+    Parameters:
+    recommendations_df (DataFrame): DataFrame containing recommended locations and their scores.
+    ml_analysis (dict): ML analysis results, including thresholds and clustering.
     
-    返回:
-    str: HTML格式的解释文本，以及更新后的推荐数据框
+    Returns:
+    str: HTML formatted explanation text, along with the updated recommendations DataFrame.
     """
-    # 获取阈值和聚类信息
+    # Get thresholds and clustering information
     demand_thresholds = ml_analysis['demand_thresholds']
     factor_thresholds = ml_analysis['factor_thresholds']
     cluster_descriptions = ml_analysis.get('cluster_descriptions', {})
     
-    # 记录推荐计数
+    # Record recommendation counts
     rec_counts = {
         "Highly Recommended": 0,
         "Recommended": 0,
         "Not Recommended": 0
     }
     
-    # 为每个位置添加推荐状态
+    # Add recommendation status for each location
     recommendations_with_status = recommendations_df.copy()
     recommendations_with_status['recommendation_status'] = recommendations_with_status.apply(
         lambda row: get_recommendation_status(
@@ -321,19 +320,19 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
         axis=1
     )
     
-    # 按状态计数
+    # Count by status
     status_counts = recommendations_with_status['recommendation_status'].value_counts()
     for status, count in status_counts.items():
         if status in rec_counts:
             rec_counts[status] = count
     
-    # 获取顶级推荐
+    # Get top recommendation
     top_rec = recommendations_with_status.iloc[0]
     
-    # 识别评分列
+    # Identify score columns
     score_columns = [col for col in recommendations_df.columns if col.endswith('_score') and col != 'demand_score']
     
-    # 构建解释文本
+    # Build explanation text
     explanation_html = f"""
     <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
         <h4 style="margin-top: 0; color: #333;">Analysis of Recommendations</h4>
@@ -352,14 +351,14 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
         <ul style="margin-top: 0.5em;">
     """
     
-    # 添加前3个推荐位置的详细分析
+    # Add detailed analysis for the top 3 recommended locations
     for i, (idx, row) in enumerate(recommendations_with_status.head(3).iterrows()):
         explanation_html += f"""
             <li style="margin-bottom: 1em;"><strong>Rank #{i+1} (ID: {row.osmid}):</strong> {row.recommendation_status} - 
             Demand score: {row.demand_score:.2f}
         """
         
-        # 添加区域类型描述
+        # Add description of the zoning type
         zone_descriptions = {
             'Commercial': 'commercial district ideal for public charging',
             'Office': 'office area with good daytime demand',
@@ -381,7 +380,7 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
             <br>Located in a <strong>{zone_description}</strong>
         """
         
-        # 添加聚类信息
+        # Add clustering information
         if 'cluster' in row and row['cluster'] in cluster_descriptions:
             cluster_info = cluster_descriptions[row['cluster']]
             explanation_html += f"""
@@ -390,8 +389,8 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
         
         explanation_html += "<ul style='margin-top: 0.5em;'>"
         
-        # 为每个因素添加详细描述
-        # 距离最近充电站
+        # Add detailed description for each factor
+        # Distance to nearest charger
         if 'distance_to_nearest_charger' in row and pd.notnull(row['distance_to_nearest_charger']):
             distance = row['distance_to_nearest_charger']
             if distance < 200:
@@ -409,7 +408,7 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
                 (score: {row.get('distance_score', 0):.2f})</li>
             """
         
-        # 半径内充电站数量
+        # Number of chargers in radius
         if 'chargers_in_radius' in row and pd.notnull(row['chargers_in_radius']):
             chargers = row['chargers_in_radius']
             if chargers == 0:
@@ -427,7 +426,7 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
                 (score: {row.get('radius_score', 0):.2f})</li>
             """
         
-        # 交通流量
+        # Traffic volume
         if 'traffic' in row and pd.notnull(row['traffic']) and row['traffic'] > 0:
             traffic = row['traffic']
             if traffic < 5000:
@@ -445,7 +444,7 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
                 (score: {row.get('traffic_score', 0):.2f})</li>
             """
         
-        # 人口密度
+        # Population density
         if 'Population' in row and pd.notnull(row['Population']):
             population = row['Population']
             if population < 2000:
@@ -463,7 +462,7 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
                 (score: {row.get('population_score', 0):.2f})</li>
             """
         
-        # 收入水平
+        # Income level
         if 'Median Income' in row and pd.notnull(row['Median Income']):
             income = row['Median Income']
             if income < 50000:
@@ -481,7 +480,7 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
                 (score: {row.get('income_score', 0):.2f})</li>
             """
         
-        # 添加特定位置的建议
+        # Add recommendation for the specific location
         if row['recommendation_status'] == "Highly Recommended":
             recommendation = "This location should be considered a top priority for new charging infrastructure."
         elif row['recommendation_status'] == "Recommended":
@@ -495,21 +494,21 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
         </li>
         """
     
-    # 添加基于机器学习的整体分析
+    # Add overall ML-based analysis
     explanation_html += """</ul>
         
         <p><strong>Machine Learning Insights:</strong></p>
         <ul style="margin-top: 0.5em;">
     """
     
-    # 添加聚类见解
+    # Add clustering insights
     if cluster_descriptions:
         n_clusters = len(cluster_descriptions)
         explanation_html += f"""
             <li>Our machine learning algorithm identified {n_clusters} distinct location profiles based on multiple factors.</li>
         """
         
-        # 添加顶级聚类描述
+        # Add top cluster description
         top_cluster_idx = next(iter(cluster_descriptions))
         top_cluster = cluster_descriptions[top_cluster_idx]
         explanation_html += f"""
@@ -517,13 +516,13 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
             {top_cluster['avg_demand_score']:.2f}, characterized by {', '.join(top_cluster['top_factors'][:2])}.</li>
         """
     
-    # 添加阈值见解
+    # Add threshold insights
     explanation_html += f"""
         <li>Locations with demand scores above {demand_thresholds[1]:.2f} are considered high priority 
         and below {demand_thresholds[0]:.2f} are low priority based on our quantile analysis.</li>
     """
     
-    # 所有推荐中最有影响力的因素
+    # The most influential factors across all recommendations
     if score_columns:
         avg_scores = recommendations_df[score_columns].mean().sort_values(ascending=False)
         top_factors = avg_scores.index[:3]
@@ -532,13 +531,13 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
             <li>The most influential factors across all recommendations are {', '.join(factor_descs)}.</li>
         """
     
-    # 添加关于关键决定因素的见解
+    # Add insights about key determining factors
     explanation_html += """
         <li>Distance from existing charging infrastructure is the strongest predictor of need, with a weight of 0.5 in our model.</li>
         <li>Population density (weight: 0.2) and nearby charger saturation (weight: -0.3) are also key determinants.</li>
     """
     
-    # 结论和建议摘要
+    # Conclusion and recommendation summary
     explanation_html += """</ul>
         
         <p><strong>Recommendation Summary:</strong> Based on our machine learning analysis, we recommend prioritizing 
@@ -553,36 +552,36 @@ def generate_ml_explanations(recommendations_df, ml_analysis):
     
     return explanation_html, recommendations_with_status
 
-# 创建雷达图函数
+# Function to create a radar chart for factor analysis of the top location
 def create_radar_chart(top_recommendations, score_columns):
     """
-    为顶级位置创建因素分析雷达图
+    Create a radar chart for factor analysis of the top location.
     
-    参数:
-    top_recommendations (DataFrame): 包含推荐的数据框
-    score_columns (list): 评分列名列表
+    Parameters:
+    top_recommendations (DataFrame): DataFrame containing the recommended locations.
+    score_columns (list): List of score column names.
     
-    返回:
-    matplotlib.figure.Figure: 雷达图figure对象
-    str: 错误消息（如果有）
+    Returns:
+    matplotlib.figure.Figure: Radar chart figure object.
+    str: Error message (if any).
     """
-    # 获取顶级位置数据
+    # Get data for the top location
     if len(top_recommendations) == 0:
         return None, "No recommendations data available"
     
     top_loc = top_recommendations.iloc[0]
     
-    # 确保我们只使用数据中存在的评分列
+    # Ensure that only score columns present in the data are used
     available_score_cols = [col for col in score_columns if col in top_loc.index]
     
-    # 雷达图需要至少3个维度才有意义
+    # A radar chart requires at least 3 dimensions to be meaningful
     if len(available_score_cols) < 3:
         return None, "Not enough score dimensions for radar chart (need at least 3)"
     
-    # 获取雷达图数据
+    # Obtain radar chart data
     radar_data = top_loc[available_score_cols].copy()
     
-    # 检查数据类型，确保可以进行数值操作
+    # Check data types to ensure numeric operations are possible
     for col in available_score_cols:
         if not pd.api.types.is_numeric_dtype(radar_data[col]):
             try:
@@ -590,13 +589,13 @@ def create_radar_chart(top_recommendations, score_columns):
             except:
                 return None, f"Column {col} contains non-numeric data"
     
-    # 将值标准化到-1和1之间以便更好地可视化
+    # Normalize values to between -1 and 1 for better visualization
     max_abs = max(abs(radar_data.min()), abs(radar_data.max()))
     if max_abs > 0:
         radar_data = radar_data / max_abs
     
-    # 创建雷达图数据
-    # 更好的可读性的标签
+    # Create radar chart data
+    # Using friendly labels for readability
     column_labels = {
         'distance_score': 'Distance (0.5)', 
         'radius_score': 'Nearby Chargers (-0.3)', 
@@ -607,53 +606,52 @@ def create_radar_chart(top_recommendations, score_columns):
         'zoning_score': 'Zoning (0.1)'
     }
     
-    # 使用友好的标签
     categories = [column_labels.get(col, col.replace('_score', '').replace('_', ' ').title()) 
                  for col in available_score_cols]
     values = radar_data.tolist()
     
-    # 为了闭合雷达图，将第一个值附加到末尾
+    # To close the radar chart, append the first value at the end
     values.append(values[0])
     categories.append(categories[0])
     
-    # 计算每个类别的角度（均匀分布在圆周上）
+    # Calculate angles for each category (evenly distributed around the circle)
     angles = np.linspace(0, 2*np.pi, len(categories), endpoint=True)
     
-    # 确保角度和值数组长度相同
+    # Ensure that angles and values arrays have the same length
     if len(angles) != len(values):
         return None, f"Dimension mismatch: angles ({len(angles)}) and values ({len(values)}) have different lengths"
     
-    # 创建图形
+    # Create figure
     fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
     
-    # 绘制数据
+    # Plot data
     ax.fill(angles, values, color='red', alpha=0.25)
     ax.plot(angles, values, color='red', linewidth=2)
     
-    # 设置类别标签（不包括重复的最后一个）
+    # Set category labels (excluding the repeated last one)
     plt.xticks(angles[:-1], categories[:-1])
     
-    # 添加背景网格
+    # Add background grid
     ax.set_yticks([-1, -0.5, 0, 0.5, 1])
     ax.set_yticklabels(['-1.0', '-0.5', '0.0', '0.5', '1.0'])
     ax.grid(True)
     
-    # 添加标题
+    # Add title
     plt.title(f'Factor Profile for Top Location (ID: {top_loc.osmid})', pad=20)
     
     return fig, None
 
-# 在Streamlit中安全地显示雷达图
+# Safely display radar chart in Streamlit
 def plot_radar_in_streamlit(top_recommendations, score_columns):
     """
-    在Streamlit中安全地创建和显示雷达图
+    Safely create and display a radar chart in Streamlit.
     
-    参数:
-    top_recommendations (DataFrame): 包含推荐位置的数据框
-    score_columns (list): 评分列名列表
+    Parameters:
+    top_recommendations (DataFrame): DataFrame containing recommended locations.
+    score_columns (list): List of score column names.
     """
     try:
-        # 创建带错误处理的雷达图
+        # Create radar chart with error handling
         fig, error = create_radar_chart(top_recommendations, score_columns)
         
         if error:
@@ -663,27 +661,23 @@ def plot_radar_in_streamlit(top_recommendations, score_columns):
         if fig:
             st.pyplot(fig)
             
-            # 添加对顶级位置的分析
+            # Add analysis for the top location
             top_loc = top_recommendations.iloc[0]
             
-            # 找出顶级位置的最强和最弱因素
-            scores = {col: top_loc[col] for col in score_columns if col in top_loc}
-            sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
-            
-            # 顶级位置的详细分析
-            st.markdown("### Top Location Analysis")
-            
-            # 位置基本信息
+            # Identify basic location info
             st.markdown(f"""
             **ID**: {top_loc.osmid} | **ZIP**: {top_loc.zip} | **Zone**: {top_loc.zone_type}
             """)
             
-            # 最强因素
+            # Identify strongest factor
+            scores = {col: top_loc[col] for col in score_columns if col in top_loc}
+            sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+            
             if sorted_scores:
                 strongest = sorted_scores[0]
                 strongest_factor = strongest[0].replace('_score', '').replace('_', ' ').title()
                 
-                # 根据因素类型提供具体描述
+                # Provide specific descriptions based on factor type
                 factor_descriptions = {
                     'distance_score': f"Far from existing chargers ({top_loc.get('distance_to_nearest_charger', 'N/A')}m)",
                     'radius_score': f"Few nearby charging stations ({top_loc.get('chargers_in_radius', 'N/A')} in radius)",
@@ -733,13 +727,9 @@ try:
         value=2
     )
     
-    # # Map focus options
+    # Uncomment the following lines to enable map focus and display options
     # st.sidebar.header("Map Focus Options")
-    
-    # # Option to focus map on selected area only
     # focus_on_selection = st.sidebar.checkbox("Focus map on selected area only", value=True)
-    
-    # # Additional buffer around focus area (in degrees)
     # if focus_on_selection:
     #     focus_buffer = st.sidebar.slider(
     #         "Buffer around selected area (degrees):", 
@@ -749,12 +739,9 @@ try:
     #         step=0.01,
     #         help="Larger value shows more surrounding area"
     #     )
-    
-    # # Map size controls
     # st.sidebar.header("Map Display Options")
     # map_width = st.sidebar.slider("Map Width:", 600, 1200, 800)
     # map_height = st.sidebar.slider("Map Height:", 300, 800, 500)
-
 
     focus_on_selection = True
     focus_buffer = 0.05
@@ -767,7 +754,7 @@ try:
     
     # Create map button
     if st.sidebar.button("Show Recommendations"):
-        # Show a spinner while preparing the map
+        # Show a spinner while preparing the map and running ML analysis...
         with st.spinner("Preparing map and running ML analysis..."):
             # Filter data
             if zip_filter:
@@ -801,8 +788,7 @@ try:
                     center_lon = (min_lon + max_lon) / 2
                     map_center = [center_lat, center_lon]
                     
-                    # Calculate appropriate zoom level
-                    # We'll use the bounds for fit_bounds later
+                    # Calculate appropriate zoom level (bounds will be used for fit_bounds later)
                     sw = [min_lat, min_lon]
                     ne = [max_lat, max_lon]
                     
@@ -857,8 +843,7 @@ try:
             if focus_on_selection and sw and ne:
                 m.fit_bounds([sw, ne])
             
-            # Add JavaScript to restrict the maximum bounds
-            # This ensures the user can't pan outside California
+            # Add JavaScript to restrict the maximum bounds so the user cannot pan outside California
             script = f"""
             <script>
                 var map = document.querySelector('#{m.get_name()}').map;
@@ -881,9 +866,8 @@ try:
             # Add all parking lots layer (initially hidden)
             all_parking_fg = folium.FeatureGroup(name="All Parking Lots", show=False)
             
-            # If focusing on selection, only show parking lots in the visible area
+            # If focusing on selection, only show parking lots in the visible area (with a buffer)
             if focus_on_selection and sw and ne:
-                # Filter to show only points within the visible area (with a buffer)
                 visible_data = data[
                     (data.geometry.centroid.y >= min_lat - 0.1) & 
                     (data.geometry.centroid.y <= max_lat + 0.1) & 
@@ -909,7 +893,7 @@ try:
                         tooltip=tooltip
                     ).add_to(all_parking_fg)
                 else:
-                    # Try to add polygon or other geometry
+                    # Attempt to add polygon or other geometry
                     try:
                         folium.GeoJson(
                             row.geometry,
@@ -966,7 +950,7 @@ try:
                         tooltip=tooltip
                     ).add_to(recommendations_fg)
                 else:
-                    # Try to add polygon or other geometry
+                    # Attempt to add polygon or other geometry
                     try:
                         folium.GeoJson(
                             row.geometry,
@@ -1230,4 +1214,4 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
     st.info("Please make sure your data is properly loaded and contains the required columns.")
-    st.exception(e)  # Show detailed error for debugging
+    st.exception(e)  # Show detailed error for debugging.
