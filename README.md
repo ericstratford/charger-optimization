@@ -6,7 +6,7 @@ The EVCS-OPTIM project provides an interactive tool designed to recommend optima
 
 
 ### Reproducing
-#### CS_Lots_Scores_Exp
+#### CS_Lots_Score_Exp / CS_Lots_Data
 
 ** Downloads **
 To re-run the code provided in CS_Lots, one needs to download the data, shapefiles, and python notebook provided in the main repository.
