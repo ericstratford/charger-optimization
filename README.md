@@ -5,7 +5,7 @@ Electric Vehicle Charging Stations - Optimizing Placement Tool via Infrastructur
 This project aims to provide an interactive tool which recommends the best locations to construct additional electric vehicle charging stations. We primarily use demand-incentive based data, performing geospatial and temporal analysis in order to inform an optimization tool. For the current iteration of the model, we evaluate public parkings lots and score them based on an optimization model prior to ranking and recommending lots according to user-inputted criteria.
 
 ### Reproducing
-#### CS_Lots
+#### CS_Lots_Scores
 
 ** Downloads **
 To re-run the code provided in CS_Lots, one needs to download the data, shapefiles, and python notebook provided in the main repository.
